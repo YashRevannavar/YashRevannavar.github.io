@@ -1,148 +1,647 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Yash Revannavar</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.16/dist/tailwind.min.css" rel="stylesheet" />
-</head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Yash Revannavar - Data Scientist Portfolio | Machine Learning, AI, and Data Analysis">
+    <meta name="keywords" content="Data Science, Machine Learning, AI, Portfolio, Python, AWS, Azure">
+    <title>Yash Revannavar - Data Science Portfolio</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <style>
+        /* CSS Variables */
+        :root {
+            --primary-color: #6366f1;
+            --secondary-color: #4f46e5;
+            --accent-color: #ec4899;
+            --background-dark: #0f172a;
+            --background-light: #1e293b;
+            --text-primary: #f8fafc;
+            --text-secondary: #cbd5e1;
+            --animation-duration: 0.3s;
+            --animation-timing: cubic-bezier(0.4, 0, 0.2, 1);
+        }
 
-<body class="bg-gray-900 text-white font-sans">
+        /* Base Styles */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--background-dark);
+            color: var(--text-primary);
+        }
+
+        /* Navigation Links */
+        .nav-link {
+            position: relative;
+            transition: color var(--animation-duration) var(--animation-timing);
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -2px;
+            left: 0;
+            background-color: var(--accent-color);
+            transition: width var(--animation-duration) var(--animation-timing);
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        /* Cards & Elements */
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(99, 102, 241, 0.2);
+        }
+
+        .profile-img:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 30px rgba(236, 72, 153, 0.3);
+        }
+
+        /* Skill Bars */
+        .skill-bar {
+            height: 8px;
+            background: #2d3748;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .skill-progress {
+            height: 100%;
+            background: var(--primary-color);
+            transition: width 1s cubic-bezier(0.4, 0, 0.2, 1);
+            transform-origin: left;
+        }
+
+        /* Form Elements */
+        .form-input {
+            transition: border-color var(--animation-duration) var(--animation-timing),
+                      box-shadow var(--animation-duration) var(--animation-timing);
+        }
+
+        .form-input:focus {
+            box-shadow: 0 0 0 3px rgba(236, 72, 153, 0.2);
+        }
+
+        /* Scroll Button */
+        .scroll-top {
+            display: none;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all var(--animation-duration) var(--animation-timing);
+        }
+
+        .scroll-top.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Loading States */
+        .loading {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .loading::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(255, 255, 255, 0.1),
+                transparent
+            );
+            animation: loading 1.5s infinite;
+        }
+
+        @keyframes loading {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="fixed w-full bg-background-dark bg-opacity-95 backdrop-blur-md shadow-lg z-50">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex justify-between items-center">
+                <a href="#" class="text-2xl font-bold text-accent">YR</a>
+                <div class="hidden md:flex space-x-6">
+                    <a href="#about" class="nav-link text-text-secondary hover:text-text-primary transition" aria-label="About section">About</a>
+                    <a href="#projects" class="nav-link text-text-secondary hover:text-text-primary transition" aria-label="Projects section">Projects</a>
+                    <a href="#experience" class="nav-link text-text-secondary hover:text-text-primary transition" aria-label="Experience section">Experience</a>
+                    <a href="#blogs" class="nav-link text-text-secondary hover:text-text-primary transition" aria-label="Blog posts section">Blog</a>
+                    <a href="#linkedin-highlights" class="nav-link text-text-secondary hover:text-text-primary transition" aria-label="LinkedIn highlights section">LinkedIn</a>
+                    <a href="#contact" class="nav-link text-text-secondary hover:text-text-primary transition" aria-label="Contact section">Contact</a>
+                </div>
+                <!-- <a href="/resume.pdf" class="hidden md:block px-6 py-2 bg-accent text-white rounded-full hover:bg-opacity-90 transform hover:scale-105 transition">
+                    Download CV
+                </a> -->
+            </div>
+        </div>
+    </nav>
+
     <!-- Header Section -->
-    <header class="py-5">
-        <div class="container mx-auto text-center">
-            <h1 class="text-5xl font-bold">
-                Welcome to Yash Revannavar's Portfolio
+    <header class="min-h-screen flex items-center pt-16 bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-500">
+        <div class="container mx-auto px-6 py-16 text-center">
+            <h1 class="text-5xl md:text-6xl font-bold mb-6" data-aos="fade-up">
+                Welcome to my corner of the internet—kick back and scroll on.
             </h1>
-            <p class="mt-2 text-2xl">
-                Unlocking Data's Secrets. Navigating the Data Universe, One Insight at
-                a Time! 🚀🌌
+            <p class="text-xl md:text-2xl mb-8 text-text-secondary" data-aos="fade-up" data-aos-delay="100">
+                Some AI magic, and hopefully something useful for you.
             </p>
+            <a href="#projects" class="inline-block px-8 py-3 bg-accent text-white rounded-full text-lg hover:bg-opacity-90 transform hover:scale-105 transition duration-300 shadow-lg" data-aos="fade-up" data-aos-delay="200">
+                View My Work
+            </a>
         </div>
     </header>
 
-    <!-- About Me Section -->
-    <section class="bg-blue-800 py-16">
-        <div class="container mx-auto text-center">
-            <img src="/photos/yashDevilsBridge01.jpg" alt="Yash" class="mt-8 rounded-full mx-auto h-40 w-40" />
-            <h2 class="text-3xl font-semibold">About Me</h2>
-            <p class="mt-4 text-l">
-                👨‍💼 Ambitious data science student with 4 years' industry experience
-                📊. Passion for data science & ML 🤖 fuels continuous skill growth 🚀.
-                Aspiring professional, eager for further education 📚. Proficient in
-                Python (Pandas, Numpy, SkLearn, Matplotlib, TensorFlow, Flask, Opencv,
-                beautifulsoup, pyspark), SQL, AWS, Azure, Power BI, Linux, Git. 🐍
-                Excels in fast-paced environments, detail-oriented, and a quick
-                learner 📈. Ready to join AI tech advancement in Germany! 🇩🇪
-                #DataScience #AI 🚀
-            </p>
+    <!-- About Section -->
+    <section id="about" class="min-h-screen flex items-center bg-gray-900" data-aos="fade-up">
+        <div class="container mx-auto px-6 py-24">
+            <div class="flex flex-col md:flex-row items-center">
+                <div class="md:w-1/3 mb-8 md:mb-0">
+                    <img src="/photos/yashDevilsBridge01.jpg" alt="Yash Revannavar" class="rounded-full w-48 h-48 mx-auto shadow-xl border-4 border-accent border-opacity-50" data-aos="zoom-in">
+                </div>
+                <div class="md:w-2/3 md:pl-12">
+                    <h2 class="text-4xl font-bold mb-6" data-aos="fade-up">About Me</h2>
+                    <p class="text-lg text-text-secondary mb-6" data-aos="fade-up" data-aos-delay="200">
+                        Building AI tools that actually do stuff—some for me, most to make your life easier. By day, I develop production-grade LLMs/Gen-ai so apps scale smoothly.
+                    </p>
+                    <p class="text-lg text-text-secondary">
+                        Currently working in OEV Online Dienste GmbH as Data guy.
+                    </p>
+                </div>
+            </div>
         </div>
     </section>
 
+
     <!-- Projects Section -->
-    <section class="py-16">
-        <div class="container mx-auto">
-            <h2 class="text-3xl font-semibold text-center">My Projects</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-8">
-                <!-- Project 1 -->
-                <div class="bg-gray-800 p-6 rounded-lg shadow-lg">
-                    <h3 class="text-2xl font-semibold">
-                        🚗 Driving Behavior Prediction
-                    </h3>
-                    <p class="mt-4 text-gray-400">
-                        🚗 "Driving Behavior ML Project" uses AI 🤖 to predict driving
-                        habits 🚦, making roads safer! Analyzing data 📊 on acceleration,
-                        braking, and steering, we identify risky behaviors. 📈 We test 3
-                        ML models 🧠 to enhance road safety. Python libraries: TensorFlow,
-                        scikit-learn. 🐍
-                    </p>
-                    <a href="https://github.com/YashRevannavar/DrivingBehavior"
-                        class="inline-block px-6 py-3 bg-green-600 hover:bg-green-700 text-white rounded-full text-lg transition duration-300 mt-4 block">View
-                        on GitHub</a>
+    <section id="projects" class="min-h-screen flex items-center bg-gray-900" data-aos="fade-up">
+        <div class="container mx-auto px-6 py-24">
+            <h2 class="text-4xl font-bold text-center mb-12">Featured Projects</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Project 1: LLM-Shortcuts-on-Siri -->
+                <div class="bg-background-dark rounded-lg overflow-hidden shadow-xl border border-opacity-10 border-white hover:border-accent transition-all duration-300" data-aos="fade-up">
+                    <div class="p-6">
+                        <h3 class="text-2xl font-semibold mb-4">
+                            🤖 LLM-Shortcuts-on-Siri
+                        </h3>
+                        <p class="text-text-secondary mb-4">
+                            Project that enables Siri to deliver daily AI-generated news summaries using Mistral AI. Scrapes top AI-related headlines, extracts content, and generates human-like spoken summaries.
+                        </p>
+                        <div class="mb-4">
+                            <span class="inline-block px-3 py-1 text-sm bg-background-light border border-accent rounded-full mr-2 mb-2 text-text-secondary">AWS</span>
+                            <span class="inline-block px-3 py-1 text-sm bg-background-light border border-accent rounded-full mr-2 mb-2 text-text-secondary">SST</span>
+                            <span class="inline-block px-3 py-1 text-sm bg-background-light border border-accent rounded-full mr-2 mb-2 text-text-secondary">LLM</span>
+                            <span class="inline-block px-3 py-1 text-sm bg-background-light border border-accent rounded-full mr-2 mb-2 text-text-secondary">Apple-siri</span>
+                        </div>
+                        <a href="https://github.com/YashRevannavar/LLM-Shortcuts-on-Siri" class="inline-block w-full text-center px-6 py-3 bg-gradient-to-r from-indigo-600 to-pink-600 hover:from-indigo-700 hover:to-pink-700 text-white rounded-lg transform hover:scale-105 transition-all duration-300 shadow-lg">
+                            View Project <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
                 </div>
 
-                <!-- Project 2 -->
-                <div class="bg-gray-800 p-6 rounded-lg shadow-lg">
-                    <h3 class="text-2xl font-semibold">
-                        Auto-ML for German Pollution Data Analysis
-                    </h3>
-                    <p class="mt-4 text-gray-400">
-                        🌍 Dive into our 'Auto-ML for German Pollution Data Analysis'
-                        project! 📈 I'm utilizing Automated Machine Learning (Auto-ML) to
-                        analyze pollution data from Germany, focusing on PM-10 levels in
-                        Duisburg-Walsum. 💡 I'm experimenting with algorithms like
-                        Artificial Neural Networks (ANN), LSTM, and more to gain insights.
-                        The goal? Building a robust AutoML pipeline for accurate pollution
-                        predictions. 🚀 Currently a work in progress, I'm fine-tuning and
-                        enhancing performance using Python libraries like TensorFlow,
-                        auto-sklearn, and pycaret.
-                    </p>
-                    <a href="https://github.com/YashRevannavar/Auto-ML-On-De-Pollution"
-                        class="inline-block px-6 py-3 bg-green-600 hover:bg-green-700 text-white rounded-full text-lg transition duration-300 mt-4 block">View
-                        on GitHub</a>
+                <!-- Project 2: EOD Generator -->
+                <div class="bg-background-dark rounded-lg overflow-hidden shadow-xl border border-opacity-10 border-white hover:border-accent transition-all duration-300" data-aos="fade-up" data-aos-delay="100">
+                    <div class="p-6">
+                        <h3 class="text-2xl font-semibold mb-4">
+                            📝 EOD Generator
+                        </h3>
+                        <p class="text-text-secondary mb-4">
+                            An automated tool that generates End-of-Day summaries and Sprint Reviews from Git commit logs using AWS Bedrock's Claude 3 LLM, with a web interface for easy access.
+                        </p>
+                        <div class="mb-4">
+                            <span class="inline-block px-3 py-1 text-sm bg-background-light border border-accent rounded-full mr-2 mb-2 text-text-secondary">AWS</span>
+                            <span class="inline-block px-3 py-1 text-sm bg-background-light border border-accent rounded-full mr-2 mb-2 text-text-secondary">Github</span>
+                            <span class="inline-block px-3 py-1 text-sm bg-background-light border border-accent rounded-full mr-2 mb-2 text-text-secondary">LLM</span>
+                            <span class="inline-block px-3 py-1 text-sm bg-background-light border border-accent rounded-full mr-2 mb-2 text-text-secondary">Productivity</span>
+                        </div>
+                        <a href="https://github.com/YashRevannavar/EOD-Generator" class="inline-block w-full text-center px-6 py-3 bg-gradient-to-r from-indigo-600 to-pink-600 hover:from-indigo-700 hover:to-pink-700 text-white rounded-lg transform hover:scale-105 transition-all duration-300 shadow-lg">
+                            View Project <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
                 </div>
 
-                <!-- Project 3 -->
-                <div class="bg-gray-800 p-6 rounded-lg shadow-lg">
-                    <h3 class="text-2xl font-semibold">Aws Api Data Processing</h3>
-                    <p class="mt-4 text-gray-400">
-                        📰 "AWS API Data Processing" automates news article collection via
-                        AWS Lambda 🤖. Articles are stored in S3 buckets as raw JSON 📥
-                        and CSV 📊. Interact on our Python Flask website 🌐 with search by
-                        name, title, description, and content. Seamlessly blend AWS and
-                        web for better data access 🚀. Check out our demo video 📹 for
-                        project insights! 💡
-                    </p>
-                    <a href="https://github.com/YashRevannavar/AwsApiDataProcessing "
-                        class="inline-block px-6 py-3 bg-green-600 hover:bg-green-700 text-white rounded-full text-lg transition duration-300 mt-4 block">View
-                        on GitHub</a>
+                <!-- Project 3: ask-RAG-Reddit -->
+                <div class="bg-background-dark rounded-lg overflow-hidden shadow-xl border border-opacity-10 border-white hover:border-accent transition-all duration-300" data-aos="fade-up" data-aos-delay="200">
+                    <div class="p-6">
+                        <h3 class="text-2xl font-semibold mb-4">
+                            🔍 ask-RAG-Reddit
+                        </h3>
+                        <p class="text-text-secondary mb-4">
+                            A RAG system that leverages Reddit content and Mistral AI to provide informative answers. Searches across Reddit for relevant content and generates comprehensive answers using LangChain and LangGraph.
+                        </p>
+                        <div class="mb-4">
+                            <span class="inline-block px-3 py-1 text-sm bg-background-light border border-accent rounded-full mr-2 mb-2 text-text-secondary">Reddit</span>
+                            <span class="inline-block px-3 py-1 text-sm bg-background-light border border-accent rounded-full mr-2 mb-2 text-text-secondary">RAG</span>
+                            <span class="inline-block px-3 py-1 text-sm bg-background-light border border-accent rounded-full mr-2 mb-2 text-text-secondary">LLM</span>
+                            <span class="inline-block px-3 py-1 text-sm bg-background-light border border-accent rounded-full mr-2 mb-2 text-text-secondary">Productivity</span>
+                        </div>
+                        <a href="https://github.com/YashRevannavar/ask-RAG-Reddit" class="inline-block w-full text-center px-6 py-3 bg-gradient-to-r from-indigo-600 to-pink-600 hover:from-indigo-700 hover:to-pink-700 text-white rounded-lg transform hover:scale-105 transition-all duration-300 shadow-lg">
+                            View Project <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Project 4: Driving Behavior Prediction -->
+                <div class="bg-background-dark rounded-lg overflow-hidden shadow-xl border border-opacity-10 border-white hover:border-accent transition-all duration-300" data-aos="fade-up" data-aos-delay="300">
+                    <div class="p-6">
+                        <h3 class="text-2xl font-semibold mb-4">
+                            🚗 Driving Behavior Prediction
+                        </h3>
+                        <p class="text-text-secondary mb-4">
+                            Using AI to predict driving habits and enhance road safety through analysis of acceleration, braking, and steering patterns.
+                        </p>
+                        <div class="mb-4">
+                            <span class="inline-block px-3 py-1 text-sm bg-background-light border border-accent rounded-full mr-2 mb-2 text-text-secondary">TensorFlow</span>
+                            <span class="inline-block px-3 py-1 text-sm bg-background-light border border-accent rounded-full mr-2 mb-2 text-text-secondary">scikit-learn</span>
+                            <span class="inline-block px-3 py-1 text-sm bg-background-light border border-accent rounded-full mr-2 mb-2 text-text-secondary">Python</span>
+                        </div>
+                        <a href="https://github.com/YashRevannavar/DrivingBehavior" class="inline-block w-full text-center px-6 py-3 bg-gradient-to-r from-indigo-600 to-pink-600 hover:from-indigo-700 hover:to-pink-700 text-white rounded-lg transform hover:scale-105 transition-all duration-300 shadow-lg">
+                            View Project <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Project 5: Auto-ML for German Pollution Data -->
+                <div class="bg-background-dark rounded-lg overflow-hidden shadow-xl border border-opacity-10 border-white hover:border-accent transition-all duration-300" data-aos="fade-up" data-aos-delay="400">
+                    <div class="p-6">
+                        <h3 class="text-2xl font-semibold mb-4">
+                            🌍 Auto-ML for German Pollution Data
+                        </h3>
+                        <p class="text-text-secondary mb-4">
+                            Implementing Auto-ML techniques to analyze and predict pollution levels in Duisburg-Walsum using advanced algorithms.
+                        </p>
+                        <div class="mb-4">
+                            <span class="inline-block px-3 py-1 text-sm bg-background-light border border-accent rounded-full mr-2 mb-2 text-text-secondary">Auto-sklearn</span>
+                            <span class="inline-block px-3 py-1 text-sm bg-background-light border border-accent rounded-full mr-2 mb-2 text-text-secondary">TensorFlow</span>
+                            <span class="inline-block px-3 py-1 text-sm bg-background-light border border-accent rounded-full mr-2 mb-2 text-text-secondary">PyCaret</span>
+                        </div>
+                        <a href="https://github.com/YashRevannavar/Auto-ML-On-De-Pollution" class="inline-block w-full text-center px-6 py-3 bg-gradient-to-r from-indigo-600 to-pink-600 hover:from-indigo-700 hover:to-pink-700 text-white rounded-lg transform hover:scale-105 transition-all duration-300 shadow-lg">
+                            View Project <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Experience Section -->
-    <section class="bg-purple-800 py-16">
-        <div class="container mx-auto text-center">
-            <h2 class="text-3xl font-semibold">Experience</h2>
-            <p class="mt-4 text-xl">Throughout my journey, I've gained valuable experience in the field of data, working
-                on various challenging projects.</p>
-            <img src="/photos/experience.jpg" alt="Experience Image" class="mt-8 mx-auto w-3/5">
-        </div>
-    </section>
+    <section id="experience" class="min-h-screen flex items-center bg-background-dark" data-aos="fade-up">
+        <div class="container mx-auto px-6 py-24">
+            <h2 class="text-4xl font-bold text-center mb-12 section-title">Professional Journey</h2>
+            
+            <!-- Timeline Container -->
+            <div class="relative border-l-2 border-accent pl-6 max-w-3xl mx-auto">
+                <!-- 2024 - Present -->
+                <div class="mb-10 relative" data-aos="fade-up">
+                    <div class="w-3 h-3 bg-accent rounded-full absolute -left-[25px] top-1"></div>
+                    <p class="text-sm text-text-secondary mb-1">Mar 2024 – Present</p>
+                    <h3 class="text-lg font-semibold text-text-primary">Data Scientist</h3>
+                    <p class="text-sm text-text-secondary italic">OEV Online Dienste GmbH</p>
+                    <p class="text-sm text-text-secondary mt-1">Production-grade GenAI & NLP applications.</p>
+                </div>
 
-    <!-- Contact Section -->
-    <section class="py-16">
-        <div class="container mx-auto text-center">
-            <h2 class="text-3xl font-semibold">Contact Me</h2>
-            <p class="mt-4 text-xl">I'd love to connect with you and discuss projects, or collaborations. Feel free to
-                reach out!</p>
-            <div class="mt-8 flex justify-center items-center">
-                <a href="tel:+4917650859022"
-                    class="inline-block px-6 py-3 bg-green-600 hover:bg-green-700 text-white rounded-full text-lg transition duration-300 mr-4">Call
-                    Me</a>
-                <a href="mailto:yashrevannavar13@gmail.com"
-                    class="inline-block px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-full text-lg transition duration-300 mr-4">Email
-                    Me</a>
-                <a href="https://www.facebook.com/profile.php?id=100081642862100"
-                    class="inline-block px-6 py-3 bg-green-600 hover:bg-green-800 text-white rounded-full text-lg transition duration-300 mr-4"><img
-                        src="/photos/Facebook.png" alt="Facebook Icon" class="h-6 w-6"></a>
-                <a href="https://www.linkedin.com/in/yash-revannavar-307a50136/"
-                    class="inline-block px-6 py-3 bg-green-600 hover:bg-green-800 text-white rounded-full text-lg transition duration-300"><img
-                        src="/photos/LinkedIn.png" alt="LinkedIn Icon" class="h-6 w-6"></a>
+                <!-- 2023 - 2024 Thesis -->
+                <div class="mb-10 relative" data-aos="fade-up" data-aos-delay="100">
+                    <div class="w-3 h-3 bg-accent rounded-full absolute -left-[25px] top-1"></div>
+                    <p class="text-sm text-text-secondary mb-1">Nov 2023 – Mar 2024</p>
+                    <h3 class="text-lg font-semibold text-text-primary">Master Thesis – LLMs & NLP</h3>
+                    <p class="text-sm text-text-secondary italic">OEV Online Dienste GmbH</p>
+                    <p class="text-sm text-text-secondary mt-1">Research on practical applications of LLMs.</p>
+                </div>
+
+                <!-- 2023 Siemens -->
+                <div class="mb-10 relative" data-aos="fade-up" data-aos-delay="200">
+                    <div class="w-3 h-3 bg-accent rounded-full absolute -left-[25px] top-1"></div>
+                    <p class="text-sm text-text-secondary mb-1">Oct 2023 – Mar 2024</p>
+                    <h3 class="text-lg font-semibold text-text-primary">Working Student – Data Mining & SSDS Programming</h3>
+                    <p class="text-sm text-text-secondary italic">Siemens AG</p>
+                    <p class="text-sm text-text-secondary mt-1">Involved in signal systems and structured data analysis.</p>
+                </div>
+
+                <!-- 2023 HTW -->
+                <div class="mb-10 relative" data-aos="fade-up" data-aos-delay="300">
+                    <div class="w-3 h-3 bg-accent rounded-full absolute -left-[25px] top-1"></div>
+                    <p class="text-sm text-text-secondary mb-1">Feb 2023 – Sep 2023</p>
+                    <h3 class="text-lg font-semibold text-text-primary">Software Engineer Intern</h3>
+                    <p class="text-sm text-text-secondary italic">Hochschule für Technik und Wirtschaft, Berlin</p>
+                    <p class="text-sm text-text-secondary mt-1">Focused on automation and backend tools.</p>
+                </div>
+
+                <!-- 2019 - 2022 -->
+                <div class="relative" data-aos="fade-up" data-aos-delay="400">
+                    <div class="w-3 h-3 bg-accent rounded-full absolute -left-[25px] top-1"></div>
+                    <p class="text-sm text-text-secondary mb-1">2019 – 2022</p>
+                    <h3 class="text-lg font-semibold text-text-primary">Industrial Data Guy</h3>
+                    <p class="text-sm text-text-secondary italic">India</p>
+                    <p class="text-sm text-text-secondary mt-1">Hands-on with real-world industrial data systems.</p>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Footer Section -->
-    <footer class="bg-gray-800 py-6">
-        <div class="container mx-auto text-center">
-            <p class="text-gray-400">
-                &copy; 2023 Yash Revannavar's Portfolio. All rights reserved.
+    <!-- Blog Section -->
+    <section id="blogs" class="min-h-screen flex items-center bg-background-light" data-aos="fade-up">
+        <div class="container mx-auto px-6 py-24">
+            <h2 class="text-4xl font-bold text-center mb-16 section-title">My Writings</h2>
+
+            <!-- Featured Blog -->
+            <div class="relative mb-16 bg-background-dark rounded-lg overflow-hidden border border-accent border-opacity-50 transform hover:scale-[1.02] transition-all duration-300 shadow-xl" data-aos="fade-up">
+                <div class="absolute top-6 -left-2 z-10">
+                    <span class="bg-gradient-to-r from-indigo-600 to-pink-600 text-white px-6 py-2 rounded-r-full text-lg font-bold animate-pulse shadow-lg flex items-center">
+                        🔥 Most Read Article
+                        <div class="absolute -left-2 top-1/2 transform -translate-y-1/2 w-2 h-8 bg-indigo-800"></div>
+                    </span>
+                </div>
+                <div class="md:flex">
+                    <div class="md:w-2/5">
+                        <img src="/photos/How to Build an LLM RAG Model with Custom Tools and Agents!.webp"
+                             alt="LLM-RAG Model"
+                             class="w-full h-full object-cover rounded-lg border-2 border-accent/20">
+                    </div>
+                    <div class="p-8 md:w-3/5">
+                        <h3 class="text-2xl font-semibold mb-4 text-text-primary">
+                            How to Build a LLM-RAG Model with Custom Tools & Agents
+                        </h3>
+                        <div class="flex items-center gap-4 mb-4 text-text-secondary">
+                            <span class="flex items-center">
+                                <i class="fas fa-eye mr-2"></i>
+                                6.4K Views
+                            </span>
+                            <span class="flex items-center">
+                                <i class="fas fa-book-reader mr-2"></i>
+                                3.5K Reads
+                            </span>
+                        </div>
+                    </span>
+                </div>
+                <a href="https://medium.com/@yashrevannavar13/how-to-build-a-llm-rag-model-with-custom-tools-and-agents-78b7f4b05fe8"
+                   target="_blank"
+                   class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-indigo-600 to-pink-600 text-white rounded-lg hover:from-indigo-700 hover:to-pink-700 transform hover:scale-105 transition-all duration-300 shadow-lg">
+                    Read Article <i class="fas fa-arrow-right ml-2"></i>
+                </a>
+            </div>
+
+            <!-- Other Blogs Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+                <!-- Blog 2 -->
+                <div class="bg-background-dark rounded-lg overflow-hidden hover:shadow-accent/20 transition-all duration-300 transform hover:scale-105" data-aos="fade-up" data-aos-delay="100">
+                    <img src="/photos/How to Improve Your RAG Pipelines-.webp"
+                         alt="RAG Pipelines"
+                         class="w-full h-48 object-cover rounded-t-lg border-b-2 border-accent/20">
+                    <div class="p-6">
+                        <h3 class="text-xl font-medium mb-4 text-text-primary">
+                            How to Improve Your RAG Pipelines
+                        </h3>
+                        <a href="https://medium.com/@yashrevannavar13/how-to-improve-your-rag-pipelines-ebbe45f0f1e2"
+                           target="_blank"
+                           class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-indigo-600 to-pink-600 text-white rounded-lg hover:from-indigo-700 hover:to-pink-700 transform hover:scale-105 transition-all duration-300 shadow-lg w-full justify-center">
+                            Read More <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Blog 3 -->
+                <div class="bg-background-dark rounded-lg overflow-hidden hover:shadow-accent/20 transition-all duration-300 transform hover:scale-105" data-aos="fade-up" data-aos-delay="200">
+                    <img src="/photos/Safeguarding Strategies for Sensitive Data in LLM-RAGs..webp"
+                         alt="Safeguarding Strategies"
+                         class="w-full h-48 object-cover rounded-t-lg border-b-2 border-accent/20">
+                    <div class="p-6">
+                        <h3 class="text-xl font-medium mb-4 text-text-primary">
+                            Safeguarding Strategies for Sensitive Data in LLM RAGs
+                        </h3>
+                        <a href="https://medium.com/@yashrevannavar13/safeguarding-strategies-for-sensitive-data-in-llm-rags-82cbd9ad04d5"
+                           target="_blank"
+                           class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-indigo-600 to-pink-600 text-white rounded-lg hover:from-indigo-700 hover:to-pink-700 transform hover:scale-105 transition-all duration-300 shadow-lg w-full justify-center">
+                            Read More <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Blog 4 -->
+                <div class="bg-background-dark rounded-lg overflow-hidden hover:shadow-accent/20 transition-all duration-300 transform hover:scale-105" data-aos="fade-up" data-aos-delay="300">
+                    <img src="/photos/Making Email Easier- How I Saved Hours Each Week.webp"
+                         alt="Email Automation"
+                         class="w-full h-48 object-cover rounded-t-lg border-b-2 border-accent/20">
+                    <div class="p-6">
+                        <h3 class="text-xl font-medium mb-4 text-text-primary">
+                            Making Email Easier: How I Saved Hours Each Week
+                        </h3>
+                        <a href="https://medium.com/@yashrevannavar13/making-email-easier-how-i-saved-hours-each-week-c4ee0388f6ed"
+                           target="_blank"
+                           class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-indigo-600 to-pink-600 text-white rounded-lg hover:from-indigo-700 hover:to-pink-700 transform hover:scale-105 transition-all duration-300 shadow-lg w-full justify-center">
+                            Read More <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- View All Button -->
+            <div class="text-center" data-aos="fade-up" data-aos-delay="400">
+                <a href="https://medium.com/@yashrevannavar13"
+                   target="_blank"
+                   class="inline-flex items-center px-8 py-3 bg-accent text-white rounded-full hover:bg-opacity-90 transform hover:scale-105 transition duration-300 shadow-lg">
+                    Explore All Blogs on Medium
+                    <i class="fas fa-external-link-alt ml-2"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- LinkedIn Highlights Section -->
+    <section id="linkedin-highlights" class="py-16 bg-background-dark" data-aos="fade-up">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl font-bold text-center mb-12 section-title">LinkedIn Highlights</h2>
+            <div class="max-w-6xl mx-auto">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- LinkedIn Post 1 -->
+                    <div class="bg-background-light rounded-lg overflow-hidden shadow-xl" data-aos="fade-up" data-aos-delay="200">
+                        <iframe src="https://www.linkedin.com/embed/feed/update/urn:li:activity:7191754680681541632"
+                                height="750"
+                                width="100%"
+                                frameborder="0"
+                                allowfullscreen=""
+                                title="Embedded post"
+                                class="w-full">
+                        </iframe>
+                    </div>
+
+                    <!-- LinkedIn Post 2 -->
+                    <div class="bg-background-light rounded-lg overflow-hidden shadow-xl" data-aos="fade-up" data-aos-delay="100">
+                        <iframe src="https://www.linkedin.com/embed/feed/update/urn:li:activity:7314003466845065217"
+                                height="750"
+                                width="100%"
+                                frameborder="0"
+                                allowfullscreen=""
+                                title="Embedded post"
+                                class="w-full">
+                        </iframe>
+                    </div>
+
+                    <!-- LinkedIn Post 3 -->
+                    <div class="bg-background-light rounded-lg overflow-hidden shadow-xl" data-aos="fade-up">
+                        <iframe src="https://www.linkedin.com/embed/feed/update/urn:li:share:7316939308739772420?collapsed=1"
+                                height="750"
+                                width="100%"
+                                frameborder="0"
+                                allowfullscreen=""
+                                title="Embedded post"
+                                class="w-full">
+                        </iframe>
+                    </div>
+                    
+                </div>
+
+                <!-- View More Button -->
+                <div class="text-center mt-8" data-aos="fade-up" data-aos-delay="300">
+                    <a href="https://www.linkedin.com/in/yash-revannavar-307a50136/"
+                       target="_blank"
+                       class="inline-flex items-center px-8 py-3 bg-accent text-white rounded-full hover:bg-opacity-90 transform hover:scale-105 transition duration-300 shadow-lg">
+                        View More on LinkedIn
+                        <i class="fab fa-linkedin ml-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-16 bg-background-light" data-aos="fade-up">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl font-bold text-center mb-12 section-title">Let's Connect</h2>
+            <div class="max-w-3xl mx-auto">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-8">
+                    <a href="mailto:yashrevannavar13@gmail.com"
+                       class="flex items-center justify-center space-x-4 px-6 py-4 bg-background-dark rounded-lg hover:bg-opacity-70 transition-all duration-300 group">
+                        <i class="fas fa-envelope text-accent text-2xl group-hover:scale-110 transition-transform"></i>
+                        <span class="text-text-secondary group-hover:text-text-primary transition">yashrevannavar13@gmail.com</span>
+                    </a>
+                    <a href="https://www.linkedin.com/in/yash-revannavar-307a50136/"
+                       class="flex items-center justify-center space-x-4 px-6 py-4 bg-background-dark rounded-lg hover:bg-opacity-70 transition-all duration-300 group">
+                        <i class="fab fa-linkedin text-accent text-2xl group-hover:scale-110 transition-transform"></i>
+                        <span class="text-text-secondary group-hover:text-text-primary transition">LinkedIn Profile</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Scroll to Top Button -->
+    <button class="scroll-top bg-accent p-3 rounded-full shadow-lg hover:bg-opacity-90 transform hover:scale-110 transition duration-300">
+        <i class="fas fa-arrow-up text-white"></i>
+    </button>
+
+    <!-- Footer -->
+    <footer class="bg-background-dark py-8">
+        <div class="container mx-auto px-6 text-center">
+            <p class="text-text-secondary">
+                &copy; 2024 Yash Revannavar. All rights reserved.
             </p>
         </div>
     </footer>
-</body>
 
+    <!-- AOS Animation Library -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 1000,
+            once: true,
+            easing: 'ease-in-out'
+        });
+        
+        const animateOnScroll = new IntersectionObserver(
+            (entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            },
+            { threshold: 0.1 }
+        );
+
+        // Observe elements for animation
+        document.querySelectorAll('.project-card, .skill-bar, .section-title, .profile-img').forEach(
+            el => animateOnScroll.observe(el)
+        );
+
+        // Scroll to Top Button
+        const scrollBtn = document.querySelector('.scroll-top');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                scrollBtn.style.display = 'block';
+                setTimeout(() => scrollBtn.classList.add('visible'), 50);
+            } else {
+                scrollBtn.classList.remove('visible');
+                setTimeout(() => {
+                    if (!scrollBtn.classList.contains('visible')) {
+                        scrollBtn.style.display = 'none';
+                    }
+                }, 300);
+            }
+        });
+
+        scrollBtn.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+
+        // Section transitions
+        const sections = document.querySelectorAll('section');
+        const sectionObserver = new IntersectionObserver(
+            (entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                    }
+                });
+            },
+            { threshold: 0.1 }
+        );
+
+        sections.forEach(section => {
+            section.style.opacity = '0';
+            section.style.transition = 'opacity 0.5s ease-in-out';
+            sectionObserver.observe(section);
+        });
+
+        // Check for reduced motion preference
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+        if (prefersReducedMotion.matches) {
+            // Remove animations for users who prefer reduced motion
+            document.documentElement.style.setProperty('--animation-duration', '0.01ms');
+        }
+    </script>
+</body>
 </html>
